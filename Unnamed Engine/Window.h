@@ -15,5 +15,4 @@ public:
 private:
 	Shader *shader;
 	GLFWwindow* window;
-	unsigned int VBO, VAO, EBO;
 };
