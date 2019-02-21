@@ -13,8 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
+    <Filter Include="Vertex Shaders">
       <UniqueIdentifier>{f04e9ca8-7962-4fce-bba8-79823871b395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fragment Shader">
+      <UniqueIdentifier>{6999aa7a-fff9-466f-813a-211b72d316a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,17 +27,11 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shaders\VertexShader.shader">
-      <Filter>Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +50,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Shaders\Vertex\VertexShader.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Vertex\VertexTransformShader.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Vertex\VertexTextureShader.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Fragment\FragmentShader.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
+    <None Include="Shaders\Fragment\FragmentTextureShader.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
+    <None Include="Shaders\Vertex\VertexCameraShader.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Vertex\BasicVertexShader.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Fragment\BasicFragmentShader.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
+    <None Include="Shaders\Fragment\FragmentCameraShader.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\tst.jpg">

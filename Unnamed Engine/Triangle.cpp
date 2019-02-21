@@ -8,8 +8,8 @@
 
 Triangle::Triangle()
 {
-	// set up vertex data (and buffer(s)) and configure vertex attributes
-	// ------------------------------------------------------------------
+	shader = new Shader("Shaders/Vertex/VertexShader.shader", "Shaders/Fragment/FragmentShader.shader");
+
 	float vertices2[] = {
 		// positions         // colors
 		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
@@ -19,28 +19,25 @@ Triangle::Triangle()
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
 
-	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// color attribute
+
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-	shader = new Shader(2);
 }
 
 Triangle::Triangle(char* src)
 {
-	// set up vertex data (and buffer(s)) and configure vertex attributes
-// ------------------------------------------------------------------
+	shader = new Shader("Shaders/Vertex/VertexShader.shader", "Shaders/Fragment/FragmentShader.shader");
+
 	float vertices3[] = {
-		// positions         // colors
+		 // positions         // colors
 		 -1.0f, -1.0f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
 		 -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom left
 		 -0.5f,  -0.1f, 0.0f,  1.0f, 0.0f, 0.0f   // top 
@@ -49,20 +46,18 @@ Triangle::Triangle(char* src)
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
 
-	// position attribute
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// color attribute
+
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-	shader = new Shader(2);
 }
 
 Triangle::~Triangle()
