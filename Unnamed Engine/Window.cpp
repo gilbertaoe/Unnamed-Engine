@@ -6,14 +6,28 @@
 #include <iostream>
 #include <soil.h>
 
+#include "Camera.h"
 #include "Shader.h"
 #include "Window.h"
 #include "Square.h"
 #include "Triangle.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+Camera *camera;
+
+
+void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void myKeyCallbackFunc(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+
+}
+
+void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera->scroll += yoffset;
 }
 
 Window::Window()
@@ -24,7 +38,6 @@ Window::Window()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
 
-
 	window = glfwCreateWindow(640, 480, "Unnamed Engine", NULL, NULL);
 
 	if (!window)
@@ -34,7 +47,9 @@ Window::Window()
 	}
 
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+	glfwSetKeyCallback(window, myKeyCallbackFunc);
+	glfwSetScrollCallback(window, scrollCallback);
 
 	if (glewInit() != GLEW_OK)
 	{
@@ -52,7 +67,8 @@ Window::~Window()
 
 void Window::Run()
 {
-	Shader ourShader = Shader("Shaders/Vertex/VertexCameraShader.shader", "Shaders/Fragment/FragmentCameraShader.shader");
+	camera = &Camera();
+
 	Square squareMoving = Square();
 	Square squareTextured = Square("a");
 	Square squareTexturedBack = Square("a", 1);
@@ -62,30 +78,22 @@ void Window::Run()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwPollEvents();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// create transformations
-		glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-		glm::mat4 view = glm::mat4(1.0f);
-		glm::mat4 projection = glm::mat4(1.0f);
-		model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-		projection = glm::perspective(glm::radians(45.0f), (float)640 / (float)480, 0.1f, 100.0f);
-		// retrieve the matrix uniform locations
-		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-		// pass them to the shaders (3 different ways)
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
-		// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-		ourShader.setMat4("projection", projection);
-
 		//triangle.Run();
 		//triangleRed.Run();
+
+
 		squareMoving.Run();
-		//squareTextured.Run();
-		//squareTexturedBack.Run();
+		camera->Run();
+
+		squareTextured.Run();
+		camera->Run();
+
+		squareTexturedBack.Run();
+		camera->Run();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

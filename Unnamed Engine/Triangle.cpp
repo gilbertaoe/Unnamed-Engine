@@ -8,7 +8,7 @@
 
 Triangle::Triangle()
 {
-	shader = new Shader("Shaders/Vertex/VertexShader.shader", "Shaders/Fragment/FragmentShader.shader");
+	shader = new Shader("Shaders/Vertex/VertexColor.shader", "Shaders/Fragment/Fragment.shader");
 
 	float vertices2[] = {
 		// positions         // colors
@@ -34,7 +34,7 @@ Triangle::Triangle()
 
 Triangle::Triangle(char* src)
 {
-	shader = new Shader("Shaders/Vertex/VertexShader.shader", "Shaders/Fragment/FragmentShader.shader");
+	shader = new Shader("Shaders/Vertex/Vertex.shader", "Shaders/Fragment/Fragment.shader");
 
 	float vertices3[] = {
 		 // positions         // colors

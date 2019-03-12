@@ -10,14 +10,22 @@
 
 Square::Square()
 {
-	shader = new Shader("Shaders/Vertex/BasicVertexShader.shader", "Shaders/Fragment/BasicFragmentShader.shader");
+	tex_2d = SOIL_load_OGL_texture
+	(
+		"Resources/tst.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
+	shader = new Shader("Shaders/Vertex/VertexCameraTransform.shader", "Shaders/Fragment/BasicFragment.shader");
 
 	float vertices[] = {
-		// positions          // colors           // texCoords     //texBool
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,    1.0f, 1.0f,     0.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,    1.0f, 0.0f,     0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,    0.0f, 0.0f,     0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,    0.0f, 1.0f,     0.0f  // top left 
+		// positions           // texCoords
+		 0.5f,  0.5f, 0.0f,    1.0f, 1.0f,// top right
+		 0.5f, -0.5f, 0.0f,    1.0f, 0.0f,// bottom right
+		-0.5f, -0.5f, 0.0f,    0.0f, 0.0f,// bottom left
+		-0.5f,  0.5f, 0.0f,    0.0f, 1.0f// top left 
 	};
 
 	unsigned int indices[] = {
@@ -37,17 +45,11 @@ Square::Square()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(8 * sizeof(float)));
-	glEnableVertexAttribArray(3);
 
 	isTexture = false;
 	isStatic = false;
@@ -63,14 +65,14 @@ Square::Square(const char* src)
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 	);
 
-	shader = new Shader("Shaders/Vertex/VertexTextureShader.shader", "Shaders/Fragment/FragmentTextureShader.shader");
+	shader = new Shader("Shaders/Vertex/VertexCamera.shader", "Shaders/Fragment/BasicFragment.shader");
 
 	float vertices4[] = {
-		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		// positions          // texture coords
+		 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
+		 0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
+		-0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
 	};
 
 	unsigned int indices4[] = {
@@ -90,14 +92,11 @@ Square::Square(const char* src)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices4), indices4, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
 
 	isTexture = true;
 	isStatic = true;
@@ -113,7 +112,7 @@ Square::Square(const char* src, int a)
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 	);
 
-	shader = new Shader("Shaders/Vertex/VertexTextureShader.shader", "Shaders/Fragment/FragmentTextureShader.shader");
+	shader = new Shader("Shaders/Vertex/VertexCameraTransform.shader", "Shaders/Fragment/FragmentTexture.shader");
 
 	float vertices4[] = {
 		// positions          // colors           // texture coords
@@ -150,7 +149,7 @@ Square::Square(const char* src, int a)
 	glEnableVertexAttribArray(2);
 
 	isTexture = true;
-	isStatic = true;
+	isStatic = false;
 }
 
 Square::~Square()

@@ -33,6 +33,9 @@
     <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -47,34 +50,40 @@
     <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Shaders\Vertex\VertexShader.shader">
-      <Filter>Vertex Shaders</Filter>
-    </None>
     <None Include="Shaders\Vertex\VertexTransformShader.shader">
       <Filter>Vertex Shaders</Filter>
     </None>
     <None Include="Shaders\Vertex\VertexTextureShader.shader">
       <Filter>Vertex Shaders</Filter>
     </None>
-    <None Include="Shaders\Fragment\FragmentShader.shader">
-      <Filter>Fragment Shader</Filter>
-    </None>
-    <None Include="Shaders\Fragment\FragmentTextureShader.shader">
-      <Filter>Fragment Shader</Filter>
-    </None>
-    <None Include="Shaders\Vertex\VertexCameraShader.shader">
+    <None Include="Shaders\Vertex\VertexCameraTransform.shader">
       <Filter>Vertex Shaders</Filter>
     </None>
-    <None Include="Shaders\Vertex\BasicVertexShader.shader">
+    <None Include="Shaders\Vertex\VertexCamera.shader">
       <Filter>Vertex Shaders</Filter>
     </None>
-    <None Include="Shaders\Fragment\BasicFragmentShader.shader">
+    <None Include="Shaders\Vertex\BasicVertex.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Vertex\VertexColor.shader">
+      <Filter>Vertex Shaders</Filter>
+    </None>
+    <None Include="Shaders\Fragment\BasicFragment.shader">
       <Filter>Fragment Shader</Filter>
     </None>
-    <None Include="Shaders\Fragment\FragmentCameraShader.shader">
+    <None Include="Shaders\Fragment\FragmentCamera.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
+    <None Include="Shaders\Fragment\Fragment.shader">
+      <Filter>Fragment Shader</Filter>
+    </None>
+    <None Include="Shaders\Fragment\FragmentTexture.shader">
       <Filter>Fragment Shader</Filter>
     </None>
   </ItemGroup>

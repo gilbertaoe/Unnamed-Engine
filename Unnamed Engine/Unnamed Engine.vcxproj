@@ -132,12 +132,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
@@ -145,13 +147,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Shaders\Fragment\BasicFragmentShader.shader" />
-    <None Include="Shaders\Fragment\FragmentCameraShader.shader" />
-    <None Include="Shaders\Fragment\FragmentShader.shader" />
-    <None Include="Shaders\Fragment\FragmentTextureShader.shader" />
-    <None Include="Shaders\Vertex\BasicVertexShader.shader" />
-    <None Include="Shaders\Vertex\VertexCameraShader.shader" />
-    <None Include="Shaders\Vertex\VertexShader.shader" />
+    <None Include="Shaders\Fragment\BasicFragment.shader" />
+    <None Include="Shaders\Fragment\FragmentCamera.shader" />
+    <None Include="Shaders\Fragment\Fragment.shader" />
+    <None Include="Shaders\Fragment\FragmentTexture.shader" />
+    <None Include="Shaders\Vertex\BasicVertex.shader" />
+    <None Include="Shaders\Vertex\VertexCamera.shader" />
+    <None Include="Shaders\Vertex\VertexCameraTransform.shader" />
+    <None Include="Shaders\Vertex\VertexColor.shader" />
     <None Include="Shaders\Vertex\VertexTextureShader.shader" />
     <None Include="Shaders\Vertex\VertexTransformShader.shader" />
   </ItemGroup>

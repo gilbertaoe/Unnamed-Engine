@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 
 #include "Shader.h"
 #include "Window.h"

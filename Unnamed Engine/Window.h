@@ -1,7 +1,7 @@
 #pragma once
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Shader.h"
+
+#include "Camera.h"
 
 class Window
 {
@@ -13,6 +13,5 @@ public:
 	void ReturnVersion();
 
 private:
-	Shader *shader;
-	GLFWwindow* window;
+	GLFWwindow *window;
 };
